@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PowerSarj_2022.DataAccess\PowerSarj_2022.DataAccess.csproj" />
+    <ProjectReference Include="..\PowerSarj_2022.Entities\PowerSarj_2022.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
