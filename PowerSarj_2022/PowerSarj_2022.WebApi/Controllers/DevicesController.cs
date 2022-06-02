@@ -85,6 +85,23 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
+        [HttpGet("bysite/{_site}")] // operasyonlarıda çekmemiz geremktedeir. 
+        public IActionResult Bysitesiteileincludeluvericekme(string _site)
+        {
+            var model = _deviceService.GetAllDevice(x => x.site == _site);
+
+
+            if (model != null)
+            {
+                return Ok(model);
+            }
+
+            return NotFound();
+        }
+
+
+
+
         [HttpGet("{_id}")] // Tamamlandı  Burasıda diğerinden farklı olarak operasyonların include atılmış hali ile gelmektedir. 
         public IActionResult GetAllDevicesWithId(string _id)
         {

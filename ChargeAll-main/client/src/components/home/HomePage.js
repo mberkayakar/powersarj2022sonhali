@@ -38,7 +38,7 @@ const HomePage = () => {
   }, [])
 
 const deneme =async() => {
-  const data = await ax.post("/login",{username:"recepcengiz" ,password:"1234"  })
+  const data = await ax.post("/devices/bysite/WHITEROSE",{username:"recepcengiz" ,password:"1234"  })
   console.log(data.data); 
 }
 

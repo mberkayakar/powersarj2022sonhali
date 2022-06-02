@@ -34,7 +34,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         {
             if (adminLoginDto.username!= null && adminLoginDto.password!="")
             {
-                var model = _service.GetObject(x => x.username== adminLoginDto.username && x.password == adminLoginDto.password);
+                var model = _service.Authenticate(adminLoginDto.username , adminLoginDto.password);
                 if (model!= null)
                 {
 

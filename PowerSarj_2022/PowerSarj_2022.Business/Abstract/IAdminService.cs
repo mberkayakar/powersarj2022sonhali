@@ -8,7 +8,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
 {
     public interface IAdminService  : IGenericService<Admin>
     {
-        Task<GetAdminDto> Authenticate(string username, string password);
+        IEnumerable<GetAdminDto> Authenticate(string username, string password);
         IEnumerable<List<GetAdminDto>> GetAll();
 
     }

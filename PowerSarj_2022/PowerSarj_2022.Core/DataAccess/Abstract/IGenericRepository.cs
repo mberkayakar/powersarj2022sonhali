@@ -11,6 +11,7 @@ namespace PowerSarj_2022.Core.DataAccess.Abstract
         void Update(T entity);
         void Delete(T entity);
         T GetObject( Expression<Func<T,bool>> where = null);
+        T GetObjectWithInclude(Expression<Func<T, bool>> where = null , params Expression<Func<T, object>>[] includeProperty);
         IEnumerable<T> GetAll(Expression<Func<T, bool>> where = null);
         IEnumerable<T> GetAllWıthInclude(Expression<Func<T, bool>> where = null, params Expression<Func<T, object>>[] includeProperty);
 

@@ -91,10 +91,26 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
        
 
-
-        public IEnumerable<ListDeviceDto> GetAllDevice()
+ 
+        public IEnumerable<ListDeviceDto> GetAllDevice(Expression<Func<Device, bool>> filter = null)
         {
-            var model = _deviceRepository.GetAllWıthInclude(where: null, x => x.allowedSites, x => x.operations);
+
+
+            var model = new List<Device>();
+
+            if (filter == null)
+
+                model = _deviceRepository.GetAllWıthInclude(where: null, x => x.allowedSites, x => x.operations).ToList();
+
+            else
+
+                model = _deviceRepository.GetAllWıthInclude(where: filter, x => x.allowedSites, x => x.operations).ToList() ;
+
+            
+
+
+
+
 
             if (model != null)
             {
@@ -124,7 +140,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
                         allowedsitetostring.Add(item2.Name);
                     }
 
-                    model2.FirstOrDefault(x => x._id == item._id).allowedSites= allowedsitetostring;
+                    model2.FirstOrDefault(x => x._id == item._id).allowedSites = allowedsitetostring;
 
 
                 }

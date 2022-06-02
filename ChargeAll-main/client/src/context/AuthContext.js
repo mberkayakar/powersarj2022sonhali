@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         }).catch((err) => { alert(err) }).finally(() => {
             setLoading(false)
             history.push('/')
-            // window.location.reload()
+            window.location.reload()
         })
     }
     const logout = () => {

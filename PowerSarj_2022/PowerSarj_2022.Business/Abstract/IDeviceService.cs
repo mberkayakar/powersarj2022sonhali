@@ -10,11 +10,9 @@ namespace PowerSarj_2022.DataAccess.Abstract
 {
     public interface IDeviceService : IGenericService<Device>
     {
-        IEnumerable<ListDeviceDto>  GetAllDevice();
+        IEnumerable<ListDeviceDto>  GetAllDevice(Expression<Func<Device, bool>> filter = null);
         IEnumerable<ListDeviceDtoNoOperation> GetAllDeviceWithNoOperation(Expression<Func<Device,bool>> filter = null);
         ListDeviceDtoNoOperation GetAllDeviceWithNoOperationOneObject(Expression<Func<Device, bool>> filter = null);
-
-
         SaveDeviceDto AddDevice (SaveDeviceDto device);
 
          

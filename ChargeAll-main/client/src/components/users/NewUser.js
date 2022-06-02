@@ -21,7 +21,7 @@ const NewUser = () => {
             }
         console.log(postingData);
 
-            // await ax.post("/users", postingData)
+            await ax.post("/users", postingData)
         } catch (e) {
             console.log(e)
         } finally {

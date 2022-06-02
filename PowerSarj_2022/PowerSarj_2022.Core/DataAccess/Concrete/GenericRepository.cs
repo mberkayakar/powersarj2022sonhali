@@ -73,6 +73,25 @@ namespace PowerSarj_2022.Core.DataAccess.Concrete
             return _db.Set<T>().FirstOrDefault();
         }
 
+        public T GetObjectWithInclude(Expression<Func<T, bool>> where = null, params Expression<Func<T, object>>[] includeProperty)
+        {
+            IQueryable<T> model = _db.Set<T>();
+
+            if (where != null)
+            {
+                model = model.Where(where);
+            }
+
+            if (includeProperty.Any())
+            {
+                foreach (var item in includeProperty)
+                {
+                    model = model.Include(item);
+                }
+            }
+            return model.FirstOrDefault();
+        }
+
         public void Update(T entity)
         {
            _db.Entry(entity).State = EntityState.Modified;
