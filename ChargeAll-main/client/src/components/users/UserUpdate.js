@@ -22,8 +22,8 @@ const UserUpdate = (props) => {
 
     // }
     const onSubmit = async data => {
-        console.log(data)
-        await ax.put("/users/" + data._id, {
+    
+        await ax.patch("/users/" + data._id, {
             userid: data.userid,
             cardid: data.cardid,
             username: data.username,
@@ -39,6 +39,8 @@ const UserUpdate = (props) => {
             .finally(() => {
                 history.goBack()
             })
+
+            console.log(JSON.parse(data))
     }
     return (
         <div className='container'>

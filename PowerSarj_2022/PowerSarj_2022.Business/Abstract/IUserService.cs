@@ -12,20 +12,14 @@ namespace PowerSarj_2022.DataAccess.Abstract
     {
 
         IEnumerable<User> GetAllUserİnformation(Expression<Func<User, bool>> filter, params Expression<Func<User, object>>[] children );
-
         void SaveUser(UserSaveDto usermodule);
-
         User DeleteUserWithUserId(string userid);
-
         IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null);
-
         User UpdatedUserModel (AddOperationFromUser addoperationfromuser , Expression<Func<User, bool>> filter = null);
-
         User UpdatedUserModel(UserUpdateDTO userUpdateDTO);
-
-
-
         User UserLogin(UserLoginDto userlogindto);
+        UserListDto GetUser(Expression<Func<User, bool>> filter = null);
+
 
 
 

@@ -20,6 +20,7 @@ const UserForm = (props) => {
         reset(props.initialValues);
     }, [props.initialValues]);
     const onSubmit = (data) => {
+        console.log(data)
         props.onSubmit(data)
     }
     const renderData = () => {

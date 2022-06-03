@@ -140,9 +140,9 @@ const UsersDetail = (props) => {
   }
   const deleteUser = async (user) => {
     if (window.confirm("Silmek istediğinize emin misiniz ?")) {
-      await ax.delete(`/users/${user._id}`).then(res => {
-        history.push("/users")
-        console.log(res)
+        await ax.delete(`/users/${user._id}`).then(res => {
+          history.push("/users")
+          console.log(res)
       }).catch(err => { alert(err) })
     }
   }

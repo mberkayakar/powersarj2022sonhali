@@ -11,7 +11,7 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
     {
 
         public string _id { get; set; }
-        public string userId { get; set; }
+        public string userid { get; set; }
         public string cardid { get; set; }
         public string username { get; set; }
         public string site { get; set; }

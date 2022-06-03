@@ -14,7 +14,7 @@ namespace PowerSarj_2022.Business.Concrete.DTO
             CreateMap<UserListDto, User>().ForMember(x => x.operations, dto => dto.MapFrom(x => x.operations)).ReverseMap();
             CreateMap<UserListDto, User>().ForMember(x => x.password, dto => dto.MapFrom(x => x.password)).ReverseMap();
             CreateMap<UserListDto, User>().ForMember(x => x.site, dto => dto.MapFrom(x => x.site)).ReverseMap();
-            CreateMap<UserListDto, User>().ForMember(x => x.userid, dto => dto.MapFrom(x => x.userId)).ReverseMap();
+            CreateMap<UserListDto, User>().ForMember(x => x.userid, dto => dto.MapFrom(x => x.userid)).ReverseMap();
             CreateMap<UserListDto, User>().ForMember(x => x.username, dto => dto.MapFrom(x => x.username)).ReverseMap();
             //CreateMap<UserListDto, User>().ForMember(x => x.operations, dto => dto.MapFrom(x => x.operations)).ReverseMap();
 

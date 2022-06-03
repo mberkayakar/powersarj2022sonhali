@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.Entities.Concrete.Dtos;
+using System.Collections.Generic;
 
 namespace PowerSarj_2022.WebApi.Controllers
 {
@@ -52,7 +53,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         public IActionResult GetAllUsersWithId(string _id)
         {
 
-            var model = _userService.GetAllUsers(x=> x._id== _id);
+            var model = _userService.GetUser(x=> x._id== _id);
 
             if (model != null)
             {
@@ -88,12 +89,7 @@ namespace PowerSarj_2022.WebApi.Controllers
             return Ok(userdto);
         }
 
-
-
-
-
-
-
+         
 
 
 
@@ -136,12 +132,12 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
-        [HttpDelete("{id}")]   
-        public IActionResult DeleteUser(string id)
+        [HttpDelete("{_id}")]   
+        public IActionResult DeleteUser(string _id)
         {
-            if (id != null && id!= "" )
+            if (_id != null && _id!= "" )
             {
-                var model = _userService.DeleteUserWithUserId(id);
+                var model = _userService.DeleteUserWithUserId(_id);
                 if (model != null)
                 {
                     return Ok(model);
@@ -156,13 +152,14 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
         [HttpPut("{id}")]   
-        public IActionResult UpdateUserİnformation(UserUpdateDTO userdto)
+        public IActionResult UpdateUserİnformation(UserUpdateDTO userdto , string id)
         {
+            userdto._id = id;
 
-            if (userdto.userid!=null)
+            if (userdto._id!=null && userdto.userid!= null)
             {
                 _userService.UpdatedUserModel(userdto);
-            return Ok(userdto);
+                return Ok(userdto);
 
             }
             else

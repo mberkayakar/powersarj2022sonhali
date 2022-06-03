@@ -24,7 +24,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         private readonly DbContext _db;
 
-        public UserManager(IUserRepository genericRepository , DbContext db , IDeviceRepository deviceRepository) : base(genericRepository)
+        public UserManager(IUserRepository genericRepository, DbContext db, IDeviceRepository deviceRepository) : base(genericRepository)
         {
             _db = db;
             _userService = genericRepository;
@@ -35,14 +35,14 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
         // Çalışıyor
-        public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null ) 
+        public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null)
         {
             var model = new List<User>();
 
             if (filter != null)
             {
 
-                model = _userService.GetAllWıthInclude( filter ,x=> x.fills, x=> x.devices, x=> x.operations ).ToList();
+                model = _userService.GetAllWıthInclude(filter, x => x.fills, x => x.devices, x => x.operations).ToList();
 
 
                 //model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
@@ -56,7 +56,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
             }
 
-        
+
 
 
             var configuration = new MapperConfiguration(opt =>
@@ -69,7 +69,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
             var model2 = mapper.Map<List<UserListDto>>(model);
 
 
-             
+
 
             List<Device> devices2 = new List<Device>();
             foreach (var item in model)
@@ -78,7 +78,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 // operasyonlar içerisindeki user ları silme işlemi 
                 foreach (var operation in item.operations)
                 {
-                    if (operation!=null)
+                    if (operation != null)
                     {
                         operation.user = null;
                     }
@@ -87,7 +87,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
                 foreach (var fill in item.fills)
                 {
-                    if (fill!= null)
+                    if (fill != null)
                     {
                         fill.user = null;
                     }
@@ -101,10 +101,10 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 foreach (var item2 in item.devices)
                     suruculer.Add(item2.devicename);
 
-                model2.FirstOrDefault(x => x.userId == item.userid).devices = suruculer;
+                model2.FirstOrDefault(x => x.userid == item.userid).devices = suruculer;
             }
-        
-       
+
+
 
 
             return model2;
@@ -138,7 +138,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 try
                 {
                     dynamic singledevice = _deviceRepository.GetObject(x => x.deviceid == item);
-                        //_db.Set<Device>().FirstOrDefault(x => x.devicename == item);
+                    //_db.Set<Device>().FirstOrDefault(x => x.devicename == item);
                     if (singledevice != null)
                     {
                         model.devices.Add(singledevice);
@@ -157,10 +157,10 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         }
 
-        
-        public User UpdatedUserModel( AddOperationFromUser addoperationfromuser , Expression<Func<User, bool>> filter = null)
+
+        public User UpdatedUserModel(AddOperationFromUser addoperationfromuser, Expression<Func<User, bool>> filter = null)
         {
-            var model = _db.Set<User>().Where(filter).Include(x=> x.fills).FirstOrDefault();
+            var model = _db.Set<User>().Where(filter).Include(x => x.fills).FirstOrDefault();
 
             if (model != null)
             {
@@ -172,7 +172,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
             }
             else
             {
-                return null; 
+                return null;
             }
 
             _userService.Update(model);
@@ -189,7 +189,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
         {
 
 
-             dynamic model = _userService.GetAll(x=> x.userid == userlogindto.UserId && x.password == userlogindto.Password).FirstOrDefault();
+            dynamic model = _userService.GetAll(x => x.userid == userlogindto.UserId && x.password == userlogindto.Password).FirstOrDefault();
             if (model != null)
             {
                 return model;
@@ -204,49 +204,68 @@ namespace PowerSarj_2022.DataAccess.Abstract
         public User DeleteUserWithUserId(string userid)
         {
 
-            var model = _userService.GetObject(x => x.userid == userid);
+            var model = _userService.GetObject(x => x._id == userid);
             _userService.Delete(model);
-            return model;            
+            return model;
         }
 
         public User UpdatedUserModel(UserUpdateDTO userUpdateDTO)
         {
             //var model = _userService.GetObject(x => x.userid == userUpdateDTO.userid); // include atılmıyo
 
-            var model = _db.Set<User>().Include(x=> x.devices).Include(x=> x.operations).Include(x=> x.fills).FirstOrDefault(x=> x.userid == userUpdateDTO.userid);
+            var model = _db.Set<User>().Include(x => x.devices).Include(x => x.operations).Include(x => x.fills).FirstOrDefault(x => x._id == userUpdateDTO._id);
 
             if (model != null)
             {
 
                 #region DTO DAN GELEN VERİ BİR USER VERİSİNE DÖNÜŞTÜRLDÜ 
 
-                var configuration = new MapperConfiguration(opt =>
-                {
-                    opt.AddProfile(new UserDTOtoUserMapper());
-                });
-                
-                var mapper = configuration.CreateMapper();
-                var model2 =  mapper.Map<User>(userUpdateDTO);
+                //var configuration = new MapperConfiguration(opt =>
+                //{
+                //    opt.AddProfile(new UserDTOtoUserMapper());
+                //});
+
+                //var mapper = configuration.CreateMapper();
+                //var model2 = mapper.Map<User>(userUpdateDTO);
 
 
 
-                model.cardid = model2.cardid;
-                model.balance = model2.balance;
-                model.username = model2.username;
-                model.site = model2.site;
-                model.password = model2.password;
-                model.__v = model2.__v;
-                model.balance = model2.balance;
-                model.chargingdevice = model2.chargingdevice;
+                model.cardid = userUpdateDTO.cardid;
+                model.username = userUpdateDTO.username ;
+                model.site = userUpdateDTO.site;
+                model.password = userUpdateDTO.password;
+                model.__v = userUpdateDTO.__v;
+                model.chargingdevice = userUpdateDTO.chargingdevice;
                 model.updatedAt = DateTime.Now;
 
+                //model.devices.Clear();
 
 
-        #endregion
+                //List<string> cachedevice = new List<string>();
+                //foreach (var item in userUpdateDTO.devices)
+                //{
+                //    var device = _deviceRepository.GetObject(x => x.devicename == item);
+                //    if (device!=null)
+                //    {
+                //        model.devices.Add(device);
+                //    }
+                //}
 
 
 
-                 
+
+                _userService.Update(model);
+
+                return model;
+
+
+
+
+
+                #endregion
+
+
+
 
 
 
@@ -268,9 +287,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
 
-                _userService.Update(model);
-
-                return model;
             }
             else
             {
@@ -283,6 +299,59 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         }
 
-       
+        public UserListDto GetUser(Expression<Func<User, bool>> filter = null)
+        {
+            var model = new User();
+
+            if (filter != null)
+                model = _userService.GetAllWıthInclude(filter, x => x.fills, x => x.devices, x => x.operations).FirstOrDefault();
+            else
+                model = _userService.GetAllWıthInclude(null, x => x.fills, x => x.devices, x => x.operations).FirstOrDefault();
+
+
+            var configuration = new MapperConfiguration(opt =>
+            {
+                opt.AddProfile(new UserListMapper());
+            });
+
+            var mapper = configuration.CreateMapper();
+
+            var model2 = mapper.Map<UserListDto>(model);
+
+            List<Device> devices2 = new List<Device>();
+
+
+            foreach (var operation in model.operations)
+            {
+                if (operation != null)
+                {
+                    operation.user = null;
+                }
+            }
+
+
+            foreach (var fill in model.fills)
+            {
+                if (fill != null)
+                {
+                    fill.user = null;
+                }
+            }
+
+
+
+
+            List<string> suruculer = new List<string>();
+
+            foreach (var item2 in model.devices)
+                suruculer.Add(item2.devicename);
+
+            model2.devices = suruculer;
+
+
+
+            return model2;
+        } 
     }
 }
+
