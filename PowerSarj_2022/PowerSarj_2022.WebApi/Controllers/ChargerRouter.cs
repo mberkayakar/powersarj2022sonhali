@@ -8,10 +8,33 @@ namespace PowerSarj_2022.WebApi.Controllers
     [Route("[controller]")]
     public class ChargerRouter:ControllerBase
     {
-        [HttpGet]
-        public IActionResult deneme()
+        [HttpGet("/info")]
+        public IActionResult actionResult()
         {
             return Ok();
         }
+
+
+        [HttpGet("/mobilcheck")]
+        public IActionResult mobilcheck()
+        {
+            return Ok();
+        }
+
+
+
+        [HttpGet("/start")]
+        public IActionResult Start()
+        {
+            return Ok();
+        }
+
+
+        [HttpGet("/stop")]
+        public IActionResult Stop()
+        {
+            return Ok();
+        }
+
     }
 }

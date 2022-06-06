@@ -265,7 +265,7 @@ const UsersDetail = (props) => {
                           <td>{op.amount}</td>
                           <td>{op.lastbalance}</td>
                           <td>{op.admin}</td>
-                          <td>{op.date}</td>
+                          <td>{date.format(new Date(op.date),"MM-DD-YYYY")}</td>
 
                         </tr>
                       )

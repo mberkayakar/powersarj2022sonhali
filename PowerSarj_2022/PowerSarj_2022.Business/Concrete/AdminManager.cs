@@ -17,9 +17,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
             _adminService = genericRepository;
         }
 
-        
-        
-
         public IEnumerable<GetAdminDto>Authenticate(string username, string password)
         {
             var user  =  _adminService.GetObjectWithInclude(where: x=> x.username ==username && x.password == password , includeProperty : y=> y.devices);
@@ -56,13 +53,15 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 return null;
             }
         }
-
+        
         
         public  IEnumerable<Admin> GetAll()
         {
             return  _adminService.GetAll() ;
         }
 
+        
+        
         IEnumerable<List<GetAdminDto>> IAdminService.GetAll()
         {
             throw new System.NotImplementedException();

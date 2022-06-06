@@ -37,9 +37,7 @@ namespace PowerSarj_2022.WebApi.Controllers
                 var model = _service.Authenticate(adminLoginDto.username , adminLoginDto.password);
                 if (model!= null)
                 {
-
-
-
+                     
 
                     return Ok(model);
 

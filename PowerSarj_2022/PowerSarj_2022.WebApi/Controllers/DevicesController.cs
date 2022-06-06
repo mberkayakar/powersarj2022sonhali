@@ -132,7 +132,25 @@ namespace PowerSarj_2022.WebApi.Controllers
             
             return BadRequest();
         }
-        
+
+        [HttpPost("/qrcharging")] // tamamlandı eğer dışarıdan device a  ait bilgiler gelirse (operation fill vs onlarıda map ederek db ye kaydeder )
+        public IActionResult qrcharging(SaveDeviceDto dto)
+        {
+            if (dto != null)
+            {
+                var model = _deviceService.AddDevice(dto);
+                return Ok(model);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult updatedeviceinformation(string id)
+        {
+            return Ok();
+
+        }
 
 
 
@@ -140,9 +158,18 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
+        [HttpDelete("_id")]
+        public IActionResult DeleteDevice(string _id)
+        {
+            if (_id !=null || _id != "undefined")
+            {
+                //_deviceService.Delete(_id);
+                return Ok();
+            }
+            return Ok();
 
 
-
+        }
 
 
     }

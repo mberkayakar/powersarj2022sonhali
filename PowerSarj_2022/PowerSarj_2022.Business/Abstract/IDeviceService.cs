@@ -14,7 +14,9 @@ namespace PowerSarj_2022.DataAccess.Abstract
         IEnumerable<ListDeviceDtoNoOperation> GetAllDeviceWithNoOperation(Expression<Func<Device,bool>> filter = null);
         ListDeviceDtoNoOperation GetAllDeviceWithNoOperationOneObject(Expression<Func<Device, bool>> filter = null);
         SaveDeviceDto AddDevice (SaveDeviceDto device);
+        void DeleteDevice (string _id );
 
-         
+
+
     }
 }

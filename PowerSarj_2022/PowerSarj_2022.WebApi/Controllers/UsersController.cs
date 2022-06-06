@@ -53,7 +53,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         public IActionResult GetAllUsersWithId(string _id)
         {
 
-            var model = _userService.GetUser(x=> x._id== _id);
+           var model = _userService.GetUser(x=> x._id== _id);
 
             if (model != null)
             {
@@ -93,12 +93,12 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
-        [HttpPost("addoperation")]   // add operation da user a operation eklemek 
+        [HttpPost("addoperation")]   // add operation da user a fill işlemi eklenecektir. 
         public IActionResult AddOperationFromUser(AddOperationFromUser userdto)
         {
             if (userdto != null)
             {
-                _userService.UpdatedUserModel(filter: x=> x.userid ==  userdto.userid ,addoperationfromuser: userdto);
+                _userService.UpdatedUserModel(filter: x=> x._id ==  userdto.id ,addoperationfromuser: userdto);
                 return Ok(userdto);
 
             }
@@ -156,7 +156,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         {
             userdto._id = id;
 
-            if (userdto._id!=null && userdto.userid!= null)
+            if (userdto._id!=null)
             {
                 _userService.UpdatedUserModel(userdto);
                 return Ok(userdto);

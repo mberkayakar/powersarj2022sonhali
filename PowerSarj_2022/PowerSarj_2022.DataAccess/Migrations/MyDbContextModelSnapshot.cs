@@ -70,6 +70,34 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.HasKey("_id");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            _id = "MARSIS_ADMIN_1",
+                            adminid = "mberkayakar",
+                            lastlogin = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            mail = "m.berkay.akar@gmail.com",
+                            name = "Berkay",
+                            password = "1234",
+                            site = "WHITEROSE",
+                            surname = "AKAR",
+                            tel = "0552 693 14 36",
+                            username = "MBerkayAkar10"
+                        },
+                        new
+                        {
+                            _id = "MARSIS_ADMIN_2",
+                            adminid = "recepcengiz",
+                            lastlogin = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            mail = "recepcengiz@gmail.com",
+                            name = "Recep",
+                            password = "1234",
+                            site = "MAR-SİS BİLİSİM",
+                            surname = "Cengiz",
+                            tel = "0555 XXX YY ZZ",
+                            username = "recepcengiz"
+                        });
                 });
 
             modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.AllowedSites", b =>
@@ -135,6 +163,44 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.HasIndex("adminid");
 
                     b.ToTable("Devices");
+
+                    b.HasData(
+                        new
+                        {
+                            _id = "MARDEV_1",
+                            adminid = "MARSIS_ADMIN_1",
+                            date = new DateTime(2022, 6, 6, 16, 55, 19, 759, DateTimeKind.Local).AddTicks(471),
+                            deviceid = "MARDEV_1",
+                            devicename = "MARSISBILISIM_DEVICE_1",
+                            location = "36.36 , 36.36",
+                            price = 0m,
+                            site = "WHITEROSE",
+                            type = "AC"
+                        },
+                        new
+                        {
+                            _id = "MARDEV_2",
+                            adminid = "MARSIS_ADMIN_2",
+                            date = new DateTime(2022, 6, 6, 16, 55, 19, 759, DateTimeKind.Local).AddTicks(4472),
+                            deviceid = "MARDEV_2",
+                            devicename = "MARSISBILISIM_DEVICE_2",
+                            location = "36.37 , 36.37",
+                            price = 0m,
+                            site = "MAR-SİS BİLİSİM",
+                            type = "AC"
+                        },
+                        new
+                        {
+                            _id = "MARDEV_3",
+                            adminid = "MARSIS_ADMIN_2",
+                            date = new DateTime(2022, 6, 6, 16, 55, 19, 759, DateTimeKind.Local).AddTicks(4497),
+                            deviceid = "MARDEV_3",
+                            devicename = "MARSISBILISIM_DEVICE_3",
+                            location = "36.37 , 36.37",
+                            price = 0m,
+                            site = "MAR-SİS BİLİSİM",
+                            type = "DC"
+                        });
                 });
 
             modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.Fill", b =>
@@ -157,9 +223,6 @@ namespace PowerSarj_2022.DataAccess.Migrations
 
                     b.Property<string>("user_id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("userid")
-                        .HasColumnType("int");
 
                     b.HasKey("_id");
 
@@ -200,9 +263,6 @@ namespace PowerSarj_2022.DataAccess.Migrations
 
                     b.Property<string>("user_id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("userid")
-                        .HasColumnType("int");
 
                     b.HasKey("_id");
 
@@ -247,17 +307,13 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("username")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_id");
 
                     b.HasIndex("userid")
                         .IsUnique()
                         .HasFilter("[userid] IS NOT NULL");
-
-                    b.HasIndex("username")
-                        .IsUnique()
-                        .HasFilter("[username] IS NOT NULL");
 
                     b.ToTable("Users");
                 });
@@ -297,7 +353,8 @@ namespace PowerSarj_2022.DataAccess.Migrations
                 {
                     b.HasOne("PowerSarj_2022.Entities.Concrete.User", "user")
                         .WithMany("fills")
-                        .HasForeignKey("user_id");
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("user");
                 });

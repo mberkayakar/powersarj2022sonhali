@@ -89,70 +89,74 @@ namespace PowerSarj_2022.DataAccess.Abstract
             }
         }
 
-       
-
- 
         public IEnumerable<ListDeviceDto> GetAllDevice(Expression<Func<Device, bool>> filter = null)
         {
-
 
             var model = new List<Device>();
 
             if (filter == null)
 
                 model = _deviceRepository.GetAllWıthInclude(where: null, x => x.allowedSites, x => x.operations).ToList();
-
             else
 
                 model = _deviceRepository.GetAllWıthInclude(where: filter, x => x.allowedSites, x => x.operations).ToList() ;
 
-            
-
-
-
-
 
             if (model != null)
             {
-
 
                 var configuration = new MapperConfiguration(opt =>
                 {
                     opt.AddProfile(new DeviceListMapper());
 
                 });
-
-
-
                 var mapper = configuration.CreateMapper();
                 var model2 = mapper.Map<List<ListDeviceDto>>(model);
 
 
 
+                //foreach (var item in model)
+                //{
+                //    List<string> devicelist = new List<string>();
+
+                //    foreach (var item2 in item.allowedSites)
+                //    {
+                //        devicelist.Add(item2.Name);
+                //    }
+
+                //    model2.FirstOrDefault(x => x._id == item._id).allowedSites = allowedsitetostring;
 
 
-                foreach (var item in model)
-                {
-                    List<string> allowedsitetostring = new List<string>();
-
-                    foreach (var item2 in item.allowedSites)
-                    {
-                        allowedsitetostring.Add(item2.Name);
-                    }
-
-                    model2.FirstOrDefault(x => x._id == item._id).allowedSites = allowedsitetostring;
+                //}
 
 
-                }
+                //foreach (var item in model)
+                //{
+                //    List<string> allowedsitetostring = new List<string>();
 
-                foreach (var item in model2)
-                {
-                    foreach (var item2 in item.operations)
-                    {
-                        //item.user
-                    }
-                }
+                //    foreach (var item2 in item.)
+                //    {
+                //        allowedsitetostring.Add(item2.Name);
+                //    }
 
+                //    model2.FirstOrDefault(x => x._id == item._id).allowedSites = allowedsitetostring;
+
+
+                //}
+
+                //foreach (var item in model2)
+                //{
+                //    foreach (var item2 in item.operations)
+                //    {
+                //        //item.user
+                //    }
+                //}
+
+
+
+
+
+                #region MyRegion
                 //if (model2.operations!=null)
                 //{
                 //    model2.operations = new List<Operation>();
@@ -164,9 +168,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
                 //}
 
-
-
-
+                #endregion
 
                 return model2;
 

@@ -21,13 +21,13 @@ const UserBalance = (props) => {
       setTxt(err)
       console.log(err)
     })
-  },[balance])
+  },[])
   const updateBalance = async () => {
     if (balance > 0) {
-     await ax.put(`/users/${userData._id}`, {
-      balance: parseFloat(userData.balance) + parseFloat(balance)
+     await ax.put(`/users/${userData._id}`,
+        { balance: parseFloat(userData.balance) + parseFloat(balance) }).finally(() => {})
+
         
-      }).finally(() => {})
      await ax.post(`/users/addoperation`, {"id":userData._id ,"operation":"fill","amount": Number(balance),
       "lastbalance": Number(userData.balance) + Number(balance), "admin":userInfo.username,"date":date.format(new Date(), 'YYYY-MM-DD HH:mm:ss')
       }).finally(() => {

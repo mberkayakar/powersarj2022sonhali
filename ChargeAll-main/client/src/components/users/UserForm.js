@@ -16,6 +16,7 @@ const UserForm = (props) => {
         }
         getUser()
     }, [])
+    console.log(deviceData);
     useEffect(() => {
         reset(props.initialValues);
     }, [props.initialValues]);
@@ -31,6 +32,7 @@ const UserForm = (props) => {
             }
         })
     }
+    console.log(renderData());
     return (
         <form className="row g-3" onSubmit={handleSubmit((data) => onSubmit(data))}>
             <div className="col-md-12">

@@ -16,20 +16,15 @@ const UserUpdate = (props) => {
     useEffect(() => {
         getUser()
     }, [])
-
-    // const onSubmit = async (data) => {
-
-
-    // }
     const onSubmit = async data => {
     
-        await ax.patch("/users/" + data._id, {
+        await ax.put("/users/" + data._id, {
             userid: data.userid,
             cardid: data.cardid,
             username: data.username,
             password: data.password,
             balance: data.balance,
-            devices: data.device,
+            devices: data.devices,
             operations: data.operations,
             site: userSite,
             fills: data.fills,

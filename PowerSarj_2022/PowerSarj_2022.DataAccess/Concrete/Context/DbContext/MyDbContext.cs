@@ -33,7 +33,7 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
 
 
 
-
+            modelBuilder.Entity<User>().HasMany<Fill>(s => s.fills).WithOne(x => x.user).OnDelete(DeleteBehavior.Cascade);
             //.HasForeignKey(x => x.userid).OnDelete(DeleteBehavior.Cascade);
 
 

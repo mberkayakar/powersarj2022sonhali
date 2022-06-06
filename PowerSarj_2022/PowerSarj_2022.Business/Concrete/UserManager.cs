@@ -2,8 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PowerSarj_2022.Business.Concrete;
 using PowerSarj_2022.Business.Concrete.DTO;
-using PowerSarj_2022.Core.DataAccess.Abstract;
-using PowerSarj_2022.DataAccess.Concrete.Repository;
+using PowerSarj_2022.Business.Concrete.DTO.FillDto;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
 using System;
@@ -99,7 +98,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 List<string> suruculer = new List<string>();
 
                 foreach (var item2 in item.devices)
-                    suruculer.Add(item2.devicename);
+                    suruculer.Add(item2.deviceid);
 
                 model2.FirstOrDefault(x => x.userid == item.userid).devices = suruculer;
             }
@@ -168,7 +167,25 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 {
                     model.fills = new List<Fill>();
                 }
-                model.fills.AddRange(addoperationfromuser.fills);
+
+
+
+
+                // gelen nesneyi Fill e çevireceğiz .
+
+
+                var configuration = new MapperConfiguration(opt =>
+                {
+                    opt.AddProfile(new AddFillDtoMapper());
+                });
+
+                var mapper = configuration.CreateMapper();
+                var model2 = mapper.Map<Fill>(addoperationfromuser);
+                //model2.user = model;
+                 
+
+                model.fills.Add(model2);
+
             }
             else
             {
@@ -230,26 +247,37 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
 
-                model.cardid = userUpdateDTO.cardid;
-                model.username = userUpdateDTO.username ;
-                model.site = userUpdateDTO.site;
-                model.password = userUpdateDTO.password;
-                model.__v = userUpdateDTO.__v;
-                model.chargingdevice = userUpdateDTO.chargingdevice;
+                model.cardid = (userUpdateDTO.cardid!= null) ?  userUpdateDTO.cardid : model.cardid;
+                model.username = (userUpdateDTO.username != null) ?   userUpdateDTO.username  : model.username;
+                model.site = (userUpdateDTO.site != null) ? userUpdateDTO.site : model.site;
+                model.password =( userUpdateDTO.password != null) ? userUpdateDTO.password  : model.password ;
+                model.__v = ( userUpdateDTO.__v != null) ? userUpdateDTO.__v  : model.__v;
+                model.chargingdevice = (userUpdateDTO.chargingdevice != null) ? userUpdateDTO.chargingdevice : model.chargingdevice;
                 model.updatedAt = DateTime.Now;
+                model.balance = userUpdateDTO.balance;
 
-                //model.devices.Clear();
 
 
-                //List<string> cachedevice = new List<string>();
-                //foreach (var item in userUpdateDTO.devices)
-                //{
-                //    var device = _deviceRepository.GetObject(x => x.devicename == item);
-                //    if (device!=null)
-                //    {
-                //        model.devices.Add(device);
-                //    }
-                //}
+                if (model.devices!=null)
+                {
+
+                    if (userUpdateDTO.devices!=null)
+                    {
+
+                    model.devices.Clear();
+                    List<string> cachedevice = new List<string>();
+                    foreach (var item in userUpdateDTO.devices)
+                    {
+                        var device = _deviceRepository.GetObject(x => x.deviceid == item);
+                        if (device != null)
+                        {
+                            model.devices.Add(device);
+                        }
+                    }
+                    }
+
+
+                }
 
 
 
@@ -314,11 +342,13 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 opt.AddProfile(new UserListMapper());
             });
 
+            
+            
             var mapper = configuration.CreateMapper();
-
             var model2 = mapper.Map<UserListDto>(model);
-
             List<Device> devices2 = new List<Device>();
+
+
 
 
             foreach (var operation in model.operations)
@@ -328,7 +358,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
                     operation.user = null;
                 }
             }
-
 
             foreach (var fill in model.fills)
             {
@@ -340,14 +369,12 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
 
-
             List<string> suruculer = new List<string>();
 
             foreach (var item2 in model.devices)
-                suruculer.Add(item2.devicename);
+                suruculer.Add(item2.deviceid);
 
             model2.devices = suruculer;
-
 
 
             return model2;
