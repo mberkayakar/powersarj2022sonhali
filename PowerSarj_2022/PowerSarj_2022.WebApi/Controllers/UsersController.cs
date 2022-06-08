@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.Entities.Concrete.Dtos;
+using PowerSarj_2022.Entities.Concrete.Dtos.UserDtoFolder;
 using System.Collections.Generic;
 
 namespace PowerSarj_2022.WebApi.Controllers
@@ -21,7 +22,7 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
-        public UsersController(IUserService userservice , ILogger<UsersController> logger)
+        public UsersController(IUserService userservice, ILogger<UsersController> logger)
         {
             _userService = userservice;
             _logger = logger;
@@ -30,14 +31,14 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
         [HttpGet]  // Tamamlandı 
-        public IActionResult GetAllUsers()      
+        public IActionResult GetAllUsers()
         {
             _logger.LogTrace("Tüm Userların Listelenmesi için istek gelindi ");
-                var model = _userService.GetAllUsers();
+            var model = _userService.GetAllUsers();
 
             if (model != null)
             {
-                 return Ok(model);
+                return Ok(model);
             }
             else
             {
@@ -53,18 +54,18 @@ namespace PowerSarj_2022.WebApi.Controllers
         public IActionResult GetAllUsersWithId(string _id)
         {
 
-           var model = _userService.GetUser(x=> x._id== _id);
+            var model = _userService.GetUser(x => x._id == _id);
 
             if (model != null)
             {
-                 return Ok(model);
+                return Ok(model);
             }
             else
             {
                 return NotFound("Sistemde Kayıtlı herhangi bir kullanıcı bulunamadı ");
             }
 
-         }
+        }
 
 
 
@@ -85,12 +86,9 @@ namespace PowerSarj_2022.WebApi.Controllers
         [HttpPost]      // tüm işlemleri tamamlandı // bir user a birden çok device durumu gerçekleştr , aynı device birden çok kullanıcıya da atılmaktadır.  // operasyonlar ilk etapta gelmedipği için ve filler boş bıkaktım sonrasında repository kısmında süreç düzenlenebilir 
         public IActionResult SaveUser(UserSaveDto userdto)
         {
-            _userService.SaveUser(userdto); 
+            _userService.SaveUser(userdto);
             return Ok(userdto);
         }
-
-         
-
 
 
         [HttpPost("addoperation")]   // add operation da user a fill işlemi eklenecektir. 
@@ -98,7 +96,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         {
             if (userdto != null)
             {
-                _userService.UpdatedUserModel(filter: x=> x._id ==  userdto.id ,addoperationfromuser: userdto);
+                _userService.UpdatedUserModel(filter: x => x._id == userdto.id, addoperationfromuser: userdto);
                 return Ok(userdto);
 
             }
@@ -109,26 +107,53 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
-       
-        
-        [HttpPost("login")]   
-        public IActionResult Loginevent(UserLoginDto userlogindto)
-        {
-            if (userlogindto.Password != "" && userlogindto.UserId != "")
-            {
-                var model = _userService.UserLogin(userlogindto);
-                if (model != null)
-                {
-                    return Ok(model);
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
+        //[HttpGet] // loginlik durumunu bakman lazım 
 
-            return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
+
+
+        UserLoginModel n = new UserLoginModel
+        {
+            _id = "1",
+            username = "AKAR",
+            password = "1234",
+
+        };
+
+        [HttpPost("login")]
+
+
+
+
+
+        public IActionResult fonc()
+        {
+            ObjectResult result = new ObjectResult(n);
+            result.StatusCode = 400;
+            return result;
+             
         }
+ 
+        //public IActionResult Loginevent(UserLoginDto userlogindto)
+        //{
+
+        //    if (userlogindto.Password != "" &&  userlogindto.userid != "")
+        //    {
+        //        var model = _userService.UserLogin(userlogindto);
+        //        if (model != null)
+        //        {
+
+        //            return Ok(model);
+        //        }
+        //        else
+        //        {
+
+        //            return NotFound("Böyle bir kullanıcı bulunamadı");
+        //        }
+        //    }
+
+        //    return BadRequest() ;
+        //    //return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
+        //}
 
 
 

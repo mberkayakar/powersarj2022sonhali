@@ -169,7 +169,7 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         {
                             _id = "MARDEV_1",
                             adminid = "MARSIS_ADMIN_1",
-                            date = new DateTime(2022, 6, 6, 16, 55, 19, 759, DateTimeKind.Local).AddTicks(471),
+                            date = new DateTime(2022, 6, 8, 11, 40, 49, 42, DateTimeKind.Local).AddTicks(7048),
                             deviceid = "MARDEV_1",
                             devicename = "MARSISBILISIM_DEVICE_1",
                             location = "36.36 , 36.36",
@@ -181,7 +181,7 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         {
                             _id = "MARDEV_2",
                             adminid = "MARSIS_ADMIN_2",
-                            date = new DateTime(2022, 6, 6, 16, 55, 19, 759, DateTimeKind.Local).AddTicks(4472),
+                            date = new DateTime(2022, 6, 8, 11, 40, 49, 43, DateTimeKind.Local).AddTicks(2090),
                             deviceid = "MARDEV_2",
                             devicename = "MARSISBILISIM_DEVICE_2",
                             location = "36.37 , 36.37",
@@ -193,7 +193,7 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         {
                             _id = "MARDEV_3",
                             adminid = "MARSIS_ADMIN_2",
-                            date = new DateTime(2022, 6, 6, 16, 55, 19, 759, DateTimeKind.Local).AddTicks(4497),
+                            date = new DateTime(2022, 6, 8, 11, 40, 49, 43, DateTimeKind.Local).AddTicks(2112),
                             deviceid = "MARDEV_3",
                             devicename = "MARSISBILISIM_DEVICE_3",
                             location = "36.37 , 36.37",
@@ -237,9 +237,6 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("amount")
                         .HasColumnType("decimal(18,2)");
 
@@ -248,9 +245,6 @@ namespace PowerSarj_2022.DataAccess.Migrations
 
                     b.Property<string>("device_id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("deviceid")
-                        .HasColumnType("int");
 
                     b.Property<int>("duration")
                         .HasColumnType("int");

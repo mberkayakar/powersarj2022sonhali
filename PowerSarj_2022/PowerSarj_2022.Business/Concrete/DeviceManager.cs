@@ -89,6 +89,16 @@ namespace PowerSarj_2022.DataAccess.Abstract
             }
         }
 
+        public void DeleteDevice(string _id)
+        {
+            var model = _deviceRepository.GetObject(x => x.deviceid == _id);
+            if (model != null)
+            {
+                _deviceRepository.Delete(model);
+            }
+                 
+        }
+
         public IEnumerable<ListDeviceDto> GetAllDevice(Expression<Func<Device, bool>> filter = null)
         {
 
@@ -301,6 +311,50 @@ namespace PowerSarj_2022.DataAccess.Abstract
             {
                 return null;
             }
+        }
+
+        public GetOneDeviceDto GetOneDeviceByFilter(Expression<Func<Device, bool>> filter = null)
+        {
+            var model = new Device();
+
+            if (filter == null)
+                model = _deviceRepository.GetAllWıthInclude(where: null, x => x.allowedSites, x => x.operations , x=> x.User).FirstOrDefault();
+            else
+                model = _deviceRepository.GetAllWıthInclude(where: filter, x => x.allowedSites, x => x.operations, x => x.User).FirstOrDefault();
+
+
+            if (model != null)
+            {
+
+                var configuration = new MapperConfiguration(opt =>
+                {
+                    opt.AddProfile(new DeviceGetOneMapper());
+
+                });
+
+
+
+                var mapper = configuration.CreateMapper();
+                var model2 = mapper.Map<GetOneDeviceDto>(model);
+
+
+
+                List<string> allowedsitetostring = new List<string>();
+                foreach (var item in model.allowedSites)
+                {
+                    allowedsitetostring.Add(item.Name);
+                }
+                model2.allowedsites = allowedsitetostring;
+
+                return model2;
+
+            }
+            else
+            {
+                return null;
+            }
+
+
         }
 
 

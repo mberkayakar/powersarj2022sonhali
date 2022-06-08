@@ -38,8 +38,9 @@ const HomePage = () => {
   }, [])
 
 const deneme =async() => {
-  // const data = await ax.post("/devices/bysite/WHITEROSE",{username:"recepcengiz" ,password:"1234"  })
-  // console.log(data.data); 
+  const data1 = await ax.post("/users/login",{userid:"berkayakar123" ,password:"12345"  })
+
+ console.log( data1); 
 }
 
   const deviceCount = devices && devices.length

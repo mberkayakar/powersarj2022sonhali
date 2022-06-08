@@ -53,15 +53,25 @@ const DevicesDetail = (props) => {
   const replaceDate = (op) => {
     return new Date(op.date).getFullYear() + "-" + new Date(op.date).getMonth() + "-" + new Date(op.date).getDate()
   }
+
+  
   useEffect(() => {
     setLoading(true)
     ax.get(`/devices/${id}`).then(res => {
       setDevice(res.data)
+      
+      console.log(res.data)
+
     }).catch(err => {
       setError(err)
       console.log(error)
     }).finally(() => setLoading(false))
   }, [error, id])
+
+
+
+  console.log(device)
+
   const sorting1 = (srt = "userid", data) => {
     const sortedData = data && data.sort((a, b) => {
       if (a[srt] < b[srt]) return 1

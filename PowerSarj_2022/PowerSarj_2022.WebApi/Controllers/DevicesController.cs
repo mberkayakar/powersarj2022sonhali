@@ -105,12 +105,14 @@ namespace PowerSarj_2022.WebApi.Controllers
         [HttpGet("{_id}")] // Tamamlandı  Burasıda diğerinden farklı olarak operasyonların include atılmış hali ile gelmektedir. 
         public IActionResult GetAllDevicesWithId(string _id)
         {
-            var model = _deviceService.GetAllWithİnclude(x => x._id== _id);
+            //var model = _deviceService.GetObject(x => x._id== _id);
+            // allowedSites // get device detail
 
+            var model2 = _deviceService.GetOneDeviceByFilter(x => x._id== _id);
 
-            if (model != null)
+            if (model2 != null)
             {
-                return Ok(model);
+                return Ok(model2);
             }
 
             return NotFound();
@@ -158,12 +160,12 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
-        [HttpDelete("_id")]
+        [HttpDelete("{_id}")]
         public IActionResult DeleteDevice(string _id)
         {
             if (_id !=null || _id != "undefined")
             {
-                //_deviceService.Delete(_id);
+                _deviceService.DeleteDevice(_id);
                 return Ok();
             }
             return Ok();

@@ -12,7 +12,6 @@ namespace PowerSarj_2022.Entities.Concrete
 
         // AC - DC olma durumu 
         public string type { get; set; }
-
         public virtual List<Operation> operations { get; set; }
         public virtual List<AllowedSites> allowedSites { get; set; }
         public string site { get; set; }
@@ -23,7 +22,8 @@ namespace PowerSarj_2022.Entities.Concrete
         public string  devicename { get; set; }
         public DateTime  date { get; set; }
 
-       
+
+
         // Navigation Property
         // bir user birden çok alet ile şarj edebilir .
         

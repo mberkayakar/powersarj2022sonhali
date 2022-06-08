@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.Entities.Concrete.Dtos;
+using PowerSarj_2022.Entities.Concrete.Dtos.AdminDtoFolder;
 
 namespace PowerSarj_2022.WebApi.Controllers
 {
@@ -55,8 +56,9 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult GetAdmin()
+        public IActionResult GetAdmin(AdminUpdateDto adminUpdate , string id  )
         {
+
             return Ok();
         }
     }

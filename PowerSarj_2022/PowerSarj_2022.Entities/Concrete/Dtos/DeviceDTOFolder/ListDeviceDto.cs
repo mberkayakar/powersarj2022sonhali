@@ -19,9 +19,7 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
 
         public virtual List<OperationListDto> operations { get; set; }
         public virtual List<string> allowedSites { get; set; }
-
         public List<string> devices { get; set; }
-
         public string site { get; set; }
         public string state { get; set; } // sanırım 0 1 gibi bişi 
         public decimal price { get; set; }

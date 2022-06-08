@@ -2,6 +2,7 @@
 using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
+using PowerSarj_2022.Entities.Concrete.Dtos.UserDtoFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -16,8 +17,8 @@ namespace PowerSarj_2022.DataAccess.Abstract
         User DeleteUserWithUserId(string userid);
         IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null);
         User UpdatedUserModel (AddOperationFromUser addoperationfromuser , Expression<Func<User, bool>> filter = null);
-        User UpdatedUserModel(UserUpdateDTO userUpdateDTO);
-        User UserLogin(UserLoginDto userlogindto);
+        User UpdatedUserModel ( UserUpdateDTO userUpdateDTO);
+        UserLoginModel UserLogin(UserLoginDto userlogindto);
         UserListDto GetUser(Expression<Func<User, bool>> filter = null);
 
 

@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using PowerSarj_2022.Business.Concrete;
 using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.Business.Concrete.DTO.FillDto;
+using PowerSarj_2022.Business.Concrete.DTO.UserDto;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
+using PowerSarj_2022.Entities.Concrete.Dtos.UserDtoFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +30,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
             _db = db;
             _userService = genericRepository;
             _deviceRepository = deviceRepository;
-
-
         }
 
 
@@ -40,19 +40,13 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
             if (filter != null)
             {
-
                 model = _userService.GetAllWıthInclude(filter, x => x.fills, x => x.devices, x => x.operations).ToList();
-
-
                 //model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
             }
             else
             {
                 model = _userService.GetAllWıthInclude(null, x => x.fills, x => x.devices, x => x.operations).ToList();
-
-
                 //model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
-
             }
 
 
@@ -69,7 +63,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
 
-
             List<Device> devices2 = new List<Device>();
             foreach (var item in model)
             {
@@ -83,7 +76,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
                     }
                 }
 
-
                 foreach (var fill in item.fills)
                 {
                     if (fill != null)
@@ -91,9 +83,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
                         fill.user = null;
                     }
                 }
-
-
-
 
                 List<string> suruculer = new List<string>();
 
@@ -201,22 +190,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
         }
 
 
-        // Çalışıyor
-        public User UserLogin(UserLoginDto userlogindto)
-        {
-
-
-            dynamic model = _userService.GetAll(x => x.userid == userlogindto.UserId && x.password == userlogindto.Password).FirstOrDefault();
-            if (model != null)
-            {
-                return model;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
+  
         // Çalışıyor
         public User DeleteUserWithUserId(string userid)
         {
@@ -245,8 +219,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 //var mapper = configuration.CreateMapper();
                 //var model2 = mapper.Map<User>(userUpdateDTO);
 
-
-
                 model.cardid = (userUpdateDTO.cardid!= null) ?  userUpdateDTO.cardid : model.cardid;
                 model.username = (userUpdateDTO.username != null) ?   userUpdateDTO.username  : model.username;
                 model.site = (userUpdateDTO.site != null) ? userUpdateDTO.site : model.site;
@@ -255,8 +227,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 model.chargingdevice = (userUpdateDTO.chargingdevice != null) ? userUpdateDTO.chargingdevice : model.chargingdevice;
                 model.updatedAt = DateTime.Now;
                 model.balance = userUpdateDTO.balance;
-
-
 
                 if (model.devices!=null)
                 {
@@ -276,26 +246,17 @@ namespace PowerSarj_2022.DataAccess.Abstract
                     }
                     }
 
-
                 }
-
-
-
+                 
 
                 _userService.Update(model);
 
                 return model;
 
 
-
-
-
+                 
                 #endregion
-
-
-
-
-
+                 
 
                 #region User - User Mapplenmesi (dto dan user a dönen veri bir daha user dan user a maplenmek istedi)
 
@@ -312,19 +273,14 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 //model = model3;
                 #endregion
 
-
-
-
+                 
             }
             else
             {
                 return null;
             }
 
-
-
-
-
+             
         }
 
         public UserListDto GetUser(Expression<Func<User, bool>> filter = null)
@@ -378,7 +334,35 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
             return model2;
-        } 
+        }
+
+        UserLoginModel IUserService.UserLogin(UserLoginDto userlogindto)
+        {
+            var model = _userService.GetObject(x => x.userid == userlogindto.userid && x.password == userlogindto.Password);
+            
+            if (model!= null)
+            {
+                var configuration = new MapperConfiguration(opt =>
+                {
+                    opt.AddProfile(new UserLoginDtoMapper());
+                });
+
+                var mapper = configuration.CreateMapper();
+                var model2 = mapper.Map<UserLoginModel>(model);
+
+                //List<string> devicestostringlist= new List<string>();
+                //foreach (var item in model.devices)
+                //{
+                //    devicestostringlist.Add(item.deviceid);
+                //}
+                //model2.devices = devicestostringlist;
+                
+                return model2;
+            }
+
+            return null;
+
+        }
     }
 }
 
