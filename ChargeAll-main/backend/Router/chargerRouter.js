@@ -10,7 +10,6 @@ app.use(express.json());
 router.get("/info", (req, res) => {
     //console.log('deviceid: ' + req.query.deviceid)
     //console.log('userid: ' + req.query.deviceid)
-    //console.log('state: ' + req.query.state)
     user=null
     device=null
 

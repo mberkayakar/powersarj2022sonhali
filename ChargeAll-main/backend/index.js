@@ -9,14 +9,7 @@ app.use(basicAuth({
     users: { 'M.a.r.s.i.s': 'P.o.w.e.r.s.a.r.j' }
 }))
 app.use(express.json());
-mongoose.connect("mongodb+srv://receptanilcengiz:Rtc123456@cluster0.pxlal.mongodb.net/localapp?retryWrites=true&w=majority",(e)=>{
-    if(e){
-        console.log(e);
-    }
-    else{
-        console.log("Connected Mongo")
-    }
-});
+mongoose.connect("mongodb+srv://receptanilcengiz:Rtc123456@cluster0.pxlal.mongodb.net/localapp?retryWrites=true&w=majority").then(()=>console.log("başarılır"))
 
 
 const isloggledin = true;
@@ -42,4 +35,4 @@ app.use("/charger",chargerRouter);
 app.get("/", (req, res) => {
     res.send("Anasayfa")
 })
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3002,()=>console.log("first"));

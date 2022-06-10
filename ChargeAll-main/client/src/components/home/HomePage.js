@@ -38,9 +38,13 @@ const HomePage = () => {
   }, [])
 
 const deneme =async() => {
-  const data1 = await ax.post("/users/login",{userid:"berkayakar123" ,password:"12345"  })
+  try {
+    const data1 = await ax.post("/users/login/2",{userid:"berkayakar123" ,password:"12345"  })
+    console.log(data1)
+  } catch (e) {
+console.log(e.response)    
+  }
 
- console.log( data1); 
 }
 
   const deviceCount = devices && devices.length
