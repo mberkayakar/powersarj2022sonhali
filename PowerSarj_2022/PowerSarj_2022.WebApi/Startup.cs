@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +14,8 @@ using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.DataAccess.Concrete.Context.EfContext;
 using PowerSarj_2022.DataAccess.Concrete.Repository;
 using WebApi.Helpers;
+
+
 
 namespace PowerSarj_2022.WebApi
 {
@@ -35,12 +37,10 @@ namespace PowerSarj_2022.WebApi
             services.AddAuthentication("BasicAuth").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuth", null);
 
 
-            // lazy loading i aktif etmek i�in 
-
+            // lazy loading i aktif etmek için 
             //.UseLazyLoadingProxies()
 
             #region Dependency Injection
-
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddScoped<DbContext, MyDbContext>();
@@ -73,14 +73,11 @@ namespace PowerSarj_2022.WebApi
               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 
-
             //services.AddMvc()
             //    .AddJsonOptions(
             //        options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             //    );
-
-
-
+            
 
             services.AddSwaggerGen(c =>
             {
@@ -94,22 +91,31 @@ namespace PowerSarj_2022.WebApi
 
 
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            //app.ConfigureExceptionHandler();
+
+
+            // ürün yayınlamaya hazır halde iken yazılması gereken süreç.
+            // yayınlanan projede swagger gibi ekranlar açılmaz ve direk host edilir.
             
-             
+            if (env.IsProduction())  
+            {
+                //app.UseHsts(); // bi şurası
+            }
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PowerSarj_2022.WebApi v1"));
             }
 
+            
 
-            db.Database.Migrate();
+            //db.Database.Migrate(); // bide şurasından şüpheleniyorum açıklama satırına al tekrar pubslih alalım
 
             app.UseHttpsRedirection();
-
 
 
 

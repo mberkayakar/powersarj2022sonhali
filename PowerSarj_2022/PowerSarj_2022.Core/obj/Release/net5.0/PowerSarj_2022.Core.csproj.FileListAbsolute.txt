@@ -1,0 +1,12 @@
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\bin\Release\net5.0\PowerSarj_2022.Core.deps.json
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\bin\Release\net5.0\PowerSarj_2022.Core.dll
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\bin\Release\net5.0\PowerSarj_2022.Core.pdb
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\PowerSarj_2022.Core.csproj.AssemblyReference.cache
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\PowerSarj_2022.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\PowerSarj_2022.Core.AssemblyInfoInputs.cache
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\PowerSarj_2022.Core.AssemblyInfo.cs
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\PowerSarj_2022.Core.csproj.CoreCompileInputs.cache
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\PowerSarj_2022.Core.dll
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\refint\PowerSarj_2022.Core.dll
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\PowerSarj_2022.Core.pdb
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Core\obj\Release\net5.0\ref\PowerSarj_2022.Core.dll

@@ -4,6 +4,7 @@ using PowerSarj_2022.Business.Concrete.DTO.AdminDto;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos.AdminDtoFolder;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PowerSarj_2022.DataAccess.Abstract
@@ -12,9 +13,13 @@ namespace PowerSarj_2022.DataAccess.Abstract
     {
 
         private readonly IAdminRepository _adminService;
-        public AdminManager(IAdminRepository genericRepository) : base(genericRepository)
+        private readonly IDeviceRepository _deviceRepository;
+
+        public AdminManager(IAdminRepository genericRepository , IDeviceRepository devicereservice) : base(genericRepository)
         {
             _adminService = genericRepository;
+            _deviceRepository = devicereservice;
+            
         }
 
         public IEnumerable<GetAdminDto>Authenticate(string username, string password)
@@ -53,18 +58,36 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 return null;
             }
         }
-        
-        
-        public  IEnumerable<Admin> GetAll()
-        {
-            return  _adminService.GetAll() ;
-        }
 
-        
-        
-        IEnumerable<List<GetAdminDto>> IAdminService.GetAll()
+        public Admin Update(AdminUpdateDto adminUpdateDto, string id)
         {
-            throw new System.NotImplementedException();
+            var model = _adminService.GetObjectWithInclude(x => x._id == id, includeProperty: x => x.devices);
+            if (model!=null)
+            {
+                model.mail = adminUpdateDto.mail;
+                model.password = adminUpdateDto.password;
+                model.username = adminUpdateDto.username;
+                model.tel = adminUpdateDto.tel;
+                model.devices.Clear() ;
+                model.adminid = adminUpdateDto.adminid;
+
+                foreach (var item in adminUpdateDto.devices)
+                {
+                    var device = _deviceRepository.GetAll().FirstOrDefault(x => x.deviceid == item);
+                    if (device != null)
+                    {
+                        model.devices.Add(device);
+                    }
+                }
+
+                _adminService.Update(model);
+
+
+                return model;
+
+
+            }
+            return null;
         }
     }
 

@@ -121,8 +121,6 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
-
-
         [HttpPost] // tamamlandı eğer dışarıdan device a  ait bilgiler gelirse (operation fill vs onlarıda map ederek db ye kaydeder )
         public IActionResult SaveDevice(SaveDeviceDto dto)
         {
@@ -135,6 +133,8 @@ namespace PowerSarj_2022.WebApi.Controllers
             return BadRequest();
         }
 
+    
+        
         [HttpPost("/qrcharging")] // tamamlandı eğer dışarıdan device a  ait bilgiler gelirse (operation fill vs onlarıda map ederek db ye kaydeder )
         public IActionResult qrcharging(SaveDeviceDto dto)
         {

@@ -9,7 +9,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
     public interface IAdminService  : IGenericService<Admin>
     {
         IEnumerable<GetAdminDto> Authenticate(string username, string password);
-        IEnumerable<List<GetAdminDto>> GetAll();
+        Admin Update(AdminUpdateDto adminUpdateDto, string id);
 
     }
 }

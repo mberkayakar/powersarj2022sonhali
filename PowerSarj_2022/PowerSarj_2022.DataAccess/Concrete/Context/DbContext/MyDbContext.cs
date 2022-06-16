@@ -14,12 +14,10 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
         }
 
         #region MyRegion
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //{
-
-        //    //options.UseLazyLoadingProxies();
-        //}
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        }
+        //anladım hocam, proje hatada vermiyor ki şu diyebileelim oda yok ortada
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,0 +1,15 @@
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\bin\Release\net5.0\PowerSarj_2022.Entities.deps.json
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\bin\Release\net5.0\PowerSarj_2022.Entities.dll
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\bin\Release\net5.0\PowerSarj_2022.Entities.pdb
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\bin\Release\net5.0\PowerSarj_2022.Core.dll
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\bin\Release\net5.0\PowerSarj_2022.Core.pdb
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.csproj.AssemblyReference.cache
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.AssemblyInfoInputs.cache
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.AssemblyInfo.cs
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.csproj.CoreCompileInputs.cache
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.csproj.CopyComplete
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.dll
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\refint\PowerSarj_2022.Entities.dll
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\PowerSarj_2022.Entities.pdb
+C:\Users\mberk\OneDrive\Masaüstü\Power_Charge_App-master\PowerSarj_2022\PowerSarj_2022.Entities\obj\Release\net5.0\ref\PowerSarj_2022.Entities.dll

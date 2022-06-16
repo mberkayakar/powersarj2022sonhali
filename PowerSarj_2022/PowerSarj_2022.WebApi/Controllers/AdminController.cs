@@ -17,16 +17,10 @@ namespace PowerSarj_2022.WebApi.Controllers
     {
         private readonly Logger<AdminController> _logger;
         private readonly IAdminService _service;
-        public AdminController(
-            
-            //Logger<AdminController> logger,
-            
-            IAdminService service )
+        public AdminController( IAdminService service )
         {
-            //_logger = logger;
             _service = service;
         }
-
 
 
         [Route("/login")]
@@ -38,10 +32,7 @@ namespace PowerSarj_2022.WebApi.Controllers
                 var model = _service.Authenticate(adminLoginDto.username , adminLoginDto.password);
                 if (model!= null)
                 {
-                     
-
                     return Ok(model);
-
                 }
                 else
                 {
@@ -58,8 +49,20 @@ namespace PowerSarj_2022.WebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult GetAdmin(AdminUpdateDto adminUpdate , string id  )
         {
+            if (adminUpdate == null && (id != null || id != ""))
+            {
+                var model = _service.Update(adminUpdate, id);
+                if (model!=null)
+                {
+                    return Ok(model);
 
-            return Ok();
+                }
+                return BadRequest();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

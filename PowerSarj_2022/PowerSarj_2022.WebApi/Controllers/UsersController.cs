@@ -5,6 +5,8 @@ using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.Entities.Concrete.Dtos;
 using PowerSarj_2022.Entities.Concrete.Dtos.UserDtoFolder;
+using PowerSarj_2022.Entities.Concrete.ErrorModels;
+using System;
 using System.Collections.Generic;
 
 namespace PowerSarj_2022.WebApi.Controllers
@@ -16,17 +18,14 @@ namespace PowerSarj_2022.WebApi.Controllers
     public class UsersController : ControllerBase
     {
 
-
         private readonly IUserService _userService;
         private readonly ILogger<UsersController> _logger;
-
 
 
         public UsersController(IUserService userservice, ILogger<UsersController> logger)
         {
             _userService = userservice;
             _logger = logger;
-
         }
 
 
@@ -48,9 +47,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
 
-
-
-        [HttpGet("{_id}")]    // tamamlandı 
+        [HttpGet("{_id}")]  // tamamlandı 
         public IActionResult GetAllUsersWithId(string _id)
         {
 
@@ -68,8 +65,6 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
 
-
-
         [HttpGet("bysite/{sitename}")]  // tamamlandı 
         public IActionResult GetAllUserWithSiteParameter(string sitename)
         {
@@ -83,7 +78,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
 
-        [HttpPost]      // tüm işlemleri tamamlandı // bir user a birden çok device durumu gerçekleştr , aynı device birden çok kullanıcıya da atılmaktadır.  // operasyonlar ilk etapta gelmedipği için ve filler boş bıkaktım sonrasında repository kısmında süreç düzenlenebilir 
+        [HttpPost]  // tüm işlemleri tamamlandı // bir user a birden çok device durumu gerçekleştr , aynı device birden çok kullanıcıya da atılmaktadır.  // operasyonlar ilk etapta gelmedipği için ve filler boş bıkaktım sonrasında repository kısmında süreç düzenlenebilir 
         public IActionResult SaveUser(UserSaveDto userdto)
         {
             _userService.SaveUser(userdto);
@@ -107,54 +102,14 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
-        //[HttpGet] // loginlik durumunu bakman lazım 
 
-
-
-        UserLoginModel n = new UserLoginModel
+        [HttpPost("login/{id}")]
+        public IActionResult fonc(int id)
         {
-            _id = "1",
-            username = "AKAR",
-            password = "1234",
 
-        };
+            return Ok();
 
-        [HttpPost("login")]
-
-
-
-
-
-        public IActionResult fonc()
-        {
-            ObjectResult result = new ObjectResult(n);
-            result.StatusCode = 400;
-            return result;
-             
         }
- 
-        //public IActionResult Loginevent(UserLoginDto userlogindto)
-        //{
-
-        //    if (userlogindto.Password != "" &&  userlogindto.userid != "")
-        //    {
-        //        var model = _userService.UserLogin(userlogindto);
-        //        if (model != null)
-        //        {
-
-        //            return Ok(model);
-        //        }
-        //        else
-        //        {
-
-        //            return NotFound("Böyle bir kullanıcı bulunamadı");
-        //        }
-        //    }
-
-        //    return BadRequest() ;
-        //    //return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
-        //}
-
 
 
         [HttpDelete("{_id}")]   
@@ -176,8 +131,9 @@ namespace PowerSarj_2022.WebApi.Controllers
             return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
         }
 
+
         [HttpPut("{id}")]   
-        public IActionResult UpdateUserİnformation(UserUpdateDTO userdto , string id)
+        public IActionResult UpdateUserİnformation(UserUpdateDTO userdto , string id) // tamamdır 
         {
             userdto._id = id;
 
@@ -185,7 +141,6 @@ namespace PowerSarj_2022.WebApi.Controllers
             {
                 _userService.UpdatedUserModel(userdto);
                 return Ok(userdto);
-
             }
             else
             {
@@ -193,7 +148,9 @@ namespace PowerSarj_2022.WebApi.Controllers
             }
         }
 
-        
+
+
+
         #region Eski Kodlar 
 
         //[HttpPost]  // fils ve operation kaydedemiyor tek problemi o onun üzerinde yogunlaşacagız ..
@@ -238,6 +195,46 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         //}
         #endregion
+        #region LoginEvent
 
+        //public IActionResult Loginevent(UserLoginDto userlogindto)
+        //{
+
+        //    if (userlogindto.Password != "" &&  userlogindto.userid != "")
+        //    {
+        //        var model = _userService.UserLogin(userlogindto);
+        //        if (model != null)
+        //        {
+
+        //            return Ok(model);
+        //        }
+        //        else
+        //        {
+
+        //            return NotFound("Böyle bir kullanıcı bulunamadı");
+        //        }
+        //    }
+
+        //    return BadRequest() ;
+        //    //return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
+        //}
+        #endregion
+        #region MyRegion
+
+        //UserLoginModel n = new UserLoginModel
+        //{
+        //    _id = "1",
+        //    username = "AKAR",
+        //    password = "1234",
+
+        //};
+
+        //if (id != 1)
+        //{
+        //    throw new NotFoundException("asdasd");
+        //}
+
+        //throw new InternalErrorException("Hatalı deneme");
+        #endregion
     }
 }
