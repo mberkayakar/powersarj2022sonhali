@@ -91,14 +91,14 @@ namespace PowerSarj_2022.WebApi
 
 
 
-            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             //app.ConfigureExceptionHandler();
 
 
             // ürün yayınlamaya hazır halde iken yazılması gereken süreç.
             // yayınlanan projede swagger gibi ekranlar açılmaz ve direk host edilir.
-            
+
             if (env.IsProduction())  
             {
                 //app.UseHsts(); // bi şurası
@@ -113,7 +113,7 @@ namespace PowerSarj_2022.WebApi
 
             
 
-            //db.Database.Migrate(); // bide şurasından şüpheleniyorum açıklama satırına al tekrar pubslih alalım
+            db.Database.Migrate(); // bide şurasından şüpheleniyorum açıklama satırına al tekrar pubslih alalım
 
             app.UseHttpsRedirection();
 
